@@ -1,0 +1,20 @@
+{
+  "name": "alexdeovidal/routes",
+  "description": "Package responsible for routing the app, including middleware, complete for creating routes for api rest.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Alex de O. Vidal",
+      "email": "webav.com.br@gmail.com"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Alexdeovidal\\Route\\": "src"
+    }
+  },
+  "require": {
+    "PHP": ">=8.0"
+  }
+}
