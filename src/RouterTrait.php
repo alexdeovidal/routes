@@ -19,8 +19,9 @@ trait RouterTrait
     protected static function addRoute(string $route, string $controller, bool $middleware, string $verb, string $namespace): void
     {
         $uri = parse_url(filter_input(INPUT_SERVER, 'REQUEST_URI', FILTER_DEFAULT));
-        if (isset($uri['query']))
+        if (isset($uri['query'])){
             parse_str($uri['query'], $query);
+        }
 
         $query = (object) ($query ?? null);
         $path = ($uri['path'] ?? null);
@@ -39,8 +40,9 @@ trait RouterTrait
      */
     protected static function classExists($class): void
     {
-        if (!class_exists($class))
+        if (!class_exists($class)){
             exit(self::response(501, "{$class} controller not found"));
+        }
     }
     /**
      * @param $Instance
@@ -49,8 +51,9 @@ trait RouterTrait
      */
     protected static function methodExists($Instance, $method): void
     {
-        if (!method_exists($Instance, $method))
+        if (!method_exists($Instance, $method)){
             exit(self::response(501, "{$method} method not found"));
+        }
     }
 
     /**
@@ -61,8 +64,9 @@ trait RouterTrait
     protected static function instanceClass($class, $method): void
     {
         $Instance = new $class;
-        if (!isset($method))
+        if (!isset($method)){
             exit(self::response(501, "method not informed in the route"));
+        }
         self::methodExists($Instance, $method);
         $Instance->$method(self::getParams(), self::getQuery());
     }
@@ -87,8 +91,9 @@ trait RouterTrait
                 );
             }
         }
-        if (!$verifyRoute)
+        if (!$verifyRoute){
             exit(self::response(404, "route " . self::getUri() . " not found"));
+        }
     }
     /**
      * @param $controller
@@ -111,8 +116,9 @@ trait RouterTrait
      */
     protected static function execController($controller, $middleware, $namespace): void
     {
-        if ($middleware)
+        if ($middleware){
             self::controller("Middleware:checkAuth", "Alexdeovidal\Route", ":");
+        }
 
         self::controller($controller, $namespace, "@");
     }

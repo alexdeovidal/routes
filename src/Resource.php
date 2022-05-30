@@ -34,11 +34,11 @@ class Resource
     /**
      * @var null|stdClass
      */
-    private static ?stdClass $query;
+    private static ? stdClass $query;
     /**
      * @var null|array
      */
-    private static ?array $params;
+    private static ? array $params;
     /**
      * @var string
      */
