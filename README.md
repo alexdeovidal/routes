@@ -15,6 +15,27 @@ Terminal
 composer require alexdeovidal/routes
 ```
 
+Create .htaccess Apache
+
+```apacheconf
+RewriteEngine On
+RewriteCond %{SCRIPT_FILENAME} !-f
+RewriteCond %{SCRIPT_FILENAME} !-d
+RewriteRule ^(.*)$ index.php/$1 [L,QSA]
+```
+
+OR nginx
+
+```apacheconf
+location / {
+  if ($script_filename !~ "-f"){
+    rewrite ^(.*)$ /index.php/$1 break;
+  }
+}
+```
+
+Create index.php
+
 ```php
 use Alexdeovidal\Route\Router;
 include "../vendor/autoload.php";
@@ -33,7 +54,7 @@ try {
 }
 ```
 
-Router and Middleware key JWT 
+Router and Middleware key JWT index.php
 
 ```php
 use Alexdeovidal\Route\Router;
@@ -45,7 +66,7 @@ Router::group('Alexdeovidal\Route\Controllers\Api');
 const TOKEN_JWT = 'RxKaBOi@qjH$';
 //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpZCI6IjMzIiwiZW1haWwiOiJkamFsZXh2aWRhbEBob3RtYWlsLmNvbSJ9.3sINBq4M6u2Rx7bKcSp9jzyIWkfis6M3xmJt5A5yAOQ=
 //routes
-Router::get("/", "Controller@admin", true);
+Router::get("/", "Controller@admin");
 Router::post("/news","Controller@admin", true);
 Router::put("/users/{id}","Controller@admin", true);
 Router::delete("/users/{id}","Controller@admin", true);
