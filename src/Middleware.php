@@ -1,6 +1,8 @@
 <?php
 
 namespace Alexdeovidal\Route;
+use JsonException;
+
 /**
  * Class Middleware
  * Responsável por verificar autenticação do usuário.
@@ -12,6 +14,7 @@ class Middleware
 
     /**
      * Check validation Authorization
+     * @throws JsonException
      */
     public function checkAuth(): void
     {

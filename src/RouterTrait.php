@@ -104,7 +104,7 @@ trait RouterTrait
      */
     protected static function controller($controller, $namespace, $separator): void
     {
-        list($class, $method) = explode($separator, $controller);
+        [$class, $method] = explode($separator, $controller);
         $class = $namespace . '\\' . $class;
         self::classExists($class);
         self::instanceClass($class, $method);
