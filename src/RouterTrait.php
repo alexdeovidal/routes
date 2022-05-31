@@ -3,6 +3,7 @@
 namespace Alexdeovidal\Route;
 
 use Exception;
+use JsonException;
 
 /**
  * methods and prepare
@@ -127,6 +128,7 @@ trait RouterTrait
      * @param $code
      * @param $data
      * @return string
+     * @throws JsonException
      */
     public static function response($code, $data): string
     {
@@ -136,6 +138,6 @@ trait RouterTrait
             'data' => $data,
             'status' => Error::show($code),
             'code' => $code
-        ]);
+        ], JSON_THROW_ON_ERROR);
     }
 }
